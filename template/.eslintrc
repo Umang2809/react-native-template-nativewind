@@ -1,0 +1,129 @@
+{
+  "root": true,
+  "extends": [
+    "@react-native",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
+    "plugin:tailwindcss/recommended",
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    },
+  },
+  "plugins": [
+    "react",
+    "react-native",
+    "react-hooks",
+    "@typescript-eslint",
+    "@tanstack/query",
+    "tailwindcss",
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "react-native/react-native": true,
+  },
+  "settings": {
+    "react": {
+      "version": "detect",
+    },
+    "tailwindcss": {
+      "config": "tailwind.config.js",
+      // Class strings inside these helpers are checked too.
+      "callees": ["cn", "clsx"],
+      // NativeWind class props on React Native components.
+      "classRegex": "^(className|[a-zA-Z]+ClassName)$",
+    },
+  },
+  "rules": {
+    // React best practices
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/display-name": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    // TypeScript best practices
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+      },
+    ],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-non-null-assertion": "warn",
+
+    // Styling: NativeWind className, not StyleSheet. `style` stays allowed for
+    // computed/animated values, so only literal inline objects are flagged.
+    "react-native/no-inline-styles": "warn",
+    "react-native/split-platform-components": "warn",
+
+    // Tailwind / NativeWind classes
+    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/no-contradicting-classname": "error",
+    // Unknown classes are usually typos or Tailwind-v4 names NativeWind doesn't support.
+    "tailwindcss/no-custom-classname": "warn",
+    // Arbitrary sizes (`max-w-[560px]`) are fine for one-offs; colors are not (see below).
+    "tailwindcss/no-arbitrary-value": "off",
+    "tailwindcss/enforces-shorthand": "warn",
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/(^|\\s)[a-z:]*(bg|text|border|fill|stroke|tint)-\\[#/]",
+        "message": "No arbitrary colors in classes. Use a theme token (bg-primary, text-muted ...) or add one in src/theme.",
+      },
+      {
+        "selector": "TemplateElement[value.raw=/(^|\\s)[a-z:]*(bg|text|border|fill|stroke|tint)-\\[#/]",
+        "message": "No arbitrary colors in classes. Use a theme token (bg-primary, text-muted ...) or add one in src/theme.",
+      },
+    ],
+
+    // General best practices
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error", "info"],
+      },
+    ],
+    "no-debugger": "warn",
+    "no-var": "error",
+    "prefer-const": "error",
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+
+    // React Query best practices
+    "@tanstack/query/exhaustive-deps": "error",
+  },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**", "**/*.test.ts", "**/*.test.tsx"],
+      "env": {
+        "jest": true,
+      },
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        // cn() tests pass conflicting classes on purpose.
+        "tailwindcss/no-contradicting-classname": "off",
+        "tailwindcss/classnames-order": "off",
+      },
+    },
+    {
+      "files": ["**/*.d.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+      },
+    },
+    {
+      // Sits above ThemeProvider, so it can't use theme tokens.
+      "files": ["src/components/ErrorBoundary.tsx"],
+      "rules": {
+        "tailwindcss/no-custom-classname": "off",
+      },
+    },
+  ],
+}

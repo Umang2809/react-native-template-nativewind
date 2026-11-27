@@ -1,0 +1,52 @@
+{
+  "name": "@umang-thakkar/base-template-nativewind",
+  "version": "1.0.0",
+  "description": "React Native CLI template styled with NativeWind (Tailwind CSS): UI kit, light/dark theme tokens, Redux Toolkit + MMKV, React Query, Axios, react-hook-form",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "type": "commonjs",
+  "files": [
+    "template/*",
+    "template.config.js",
+    "!template/node_modules",
+    "!template/ios/Pods",
+    "!template/ios/build",
+    "!template/android/build",
+    "!template/android/app/build",
+    "!template/android/.gradle",
+    "!template/ios/.xcode.env.local",
+    "!template/package-lock.json",
+    "!template/yarn.lock"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "semver": "^7.6.3"
+  },
+  "homepage": "https://github.com/Umang2809/react-native-template-nativewind",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Umang2809/react-native-template-nativewind.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-template",
+    "tailwind",
+    "tailwindcss",
+    "nativewind",
+    "react-native-boilerplate",
+    "redux-toolkit",
+    "react-navigation",
+    "react-query",
+    "typescript",
+    "mobile-app",
+    "dark-mode",
+    "light-theme",
+    "rn-template"
+  ]
+}
